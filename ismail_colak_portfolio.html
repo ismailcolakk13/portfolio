@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İsmail Çolak — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --navy:   #0D1B2A;
+      --navy2:  #152235;
+      --teal:   #0DBFA0;
+      --teal2:  #0A9A83;
+      --amber:  #FBBF24;
+      --white:  #FFFFFF;
+      --light:  #F8FAFC;
+      --card:   #FFFFFF;
+      --border: #E2E8F0;
+      --text:   #1E293B;
+      --muted:  #64748B;
+      --display:'Space Grotesk', sans-serif;
+      --sans:   'Inter', sans-serif;
+      --mono:   'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text); background: var(--light); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,27,42,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(13,191,160,0.15);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--display); font-weight: 700;
+      color: var(--teal); font-size: 1.05rem; letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; background: var(--navy);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 2rem 2rem;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(13,191,160,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13,191,160,0.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    #hero::after {
+      content: ''; position: absolute;
+      top: 38%; left: 50%; transform: translate(-50%, -50%);
+      width: 640px; height: 640px; pointer-events: none;
+      background: radial-gradient(circle, rgba(13,191,160,0.11) 0%, transparent 68%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 780px;
+    }
+    .hero-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--teal2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.9rem; color: white;
+      margin: 0 auto 1.5rem;
+      border: 3px solid rgba(13,191,160,0.35);
+      box-shadow: 0 0 32px rgba(13,191,160,0.22);
+    }
+    .hero-name {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      color: #ffffff; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: var(--mono);
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      color: var(--teal); margin-bottom: 1.5rem; min-height: 1.8em;
+    }
+    .cursor {
+      display: inline-block; width: 2px; height: 1.05em;
+      background: var(--teal); margin-left: 2px;
+      vertical-align: middle; animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-desc {
+      color: rgba(255,255,255,0.6); font-size: 1rem;
+      max-width: 500px; margin: 0 auto 2rem; line-height: 1.75;
+    }
+    .hero-links {
+      display: flex; gap: 0.875rem;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.55rem 1.2rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; font-family: var(--sans);
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--teal); color: var(--navy); }
+    .btn-primary:hover { background: var(--teal2); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+
+    /* ── SECTION SHELLS ── */
+    section { padding: 80px 2rem; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+      color: var(--teal); text-transform: uppercase;
+      letter-spacing: 0.12em; margin-bottom: 0.4rem;
+    }
+    .section-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.7rem, 4vw, 2.2rem);
+      color: var(--text); letter-spacing: -0.025em; margin-bottom: 2.75rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .about-bio { font-size: 1.0rem; line-height: 1.8; color: var(--muted); }
+    .about-bio p + p { margin-top: 1rem; }
+    .about-bio strong { color: var(--text); }
+    .scores-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .score-card {
+      background: var(--light); border-radius: 12px;
+      padding: 1.2rem; border: 1px solid var(--border);
+      text-align: center; transition: border-color 0.2s, transform 0.2s;
+    }
+    .score-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+    .score-num {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.9rem; color: var(--teal); line-height: 1.1;
+    }
+    .score-label {
+      font-size: 0.75rem; font-weight: 700; color: var(--text);
+      text-transform: uppercase; letter-spacing: 0.09em; margin-top: 0.25rem;
+    }
+    .score-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--light); }
+    .skills-categories {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 2rem;
+    }
+    .skill-category h3 {
+      font-family: var(--display); font-weight: 600; font-size: 0.8rem;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 0.875rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .pill {
+      display: inline-block; padding: 0.275rem 0.7rem;
+      border-radius: 20px; font-size: 0.785rem;
+      font-weight: 500; font-family: var(--mono);
+    }
+    .pill-teal  { background: rgba(13,191,160,0.1);  color: #0A9A83; border: 1px solid rgba(13,191,160,0.22); }
+    .pill-navy  { background: rgba(13,27,42,0.07);   color: #1E3A5F; border: 1px solid rgba(13,27,42,0.14); }
+    .pill-amber { background: rgba(251,191,36,0.11); color: #B45309; border: 1px solid rgba(251,191,36,0.28); }
+    .pill-gray  { background: rgba(100,116,139,0.09);color: var(--muted); border: 1px solid var(--border); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--white); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), rgba(13,191,160,0.08));
+    }
+    .timeline-item { position: relative; margin-bottom: 2.25rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -2.44rem; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--teal); border: 2px solid var(--white);
+      box-shadow: 0 0 0 3px rgba(13,191,160,0.2);
+    }
+    .timeline-card {
+      background: var(--light); border-radius: 12px;
+      padding: 1.4rem; border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .timeline-card:hover { border-color: var(--teal); transform: translateX(4px); }
+    .timeline-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 0.3rem;
+      flex-wrap: wrap; gap: 0.4rem;
+    }
+    .timeline-role {
+      font-family: var(--display); font-weight: 600;
+      font-size: 1.05rem; color: var(--text);
+    }
+    .timeline-date {
+      font-family: var(--mono); font-size: 0.775rem;
+      color: var(--teal); background: rgba(13,191,160,0.1);
+      padding: 0.18rem 0.55rem; border-radius: 4px; white-space: nowrap;
+    }
+    .timeline-company {
+      font-weight: 600; font-size: 0.845rem;
+      color: var(--muted); margin-bottom: 0.7rem;
+    }
+    .timeline-desc { font-size: 0.9125rem; color: var(--muted); line-height: 1.72; }
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.9rem; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--light); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.4rem;
+    }
+    .project-card {
+      background: var(--white); border-radius: 12px;
+      padding: 1.4rem; border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--teal); transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(13,191,160,0.09);
+    }
+    .project-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: rgba(13,191,160,0.11);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 0.9rem;
+    }
+    .project-name {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.0rem; color: var(--text); margin-bottom: 0.45rem;
+    }
+    .project-desc {
+      font-size: 0.86rem; color: var(--muted);
+      line-height: 1.65; flex: 1; margin-bottom: 0.875rem;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.32rem; margin-bottom: 0.9rem; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--teal);
+      text-decoration: none; margin-top: auto;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--teal2); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .edu-card {
+      background: var(--light); border-radius: 12px;
+      padding: 1.65rem; border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+    }
+    .edu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .edu-header-info { flex: 1; }
+    .edu-logo { width: 72px; height: 72px; object-fit: contain; border-radius: 8px; flex-shrink: 0; background: var(--white); padding: 4px; border: 1px solid var(--border); }
+    .edu-degree {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.0rem; color: var(--text); margin-bottom: 0.2rem;
+    }
+    .edu-school { font-weight: 600; color: var(--teal2); font-size: 0.875rem; margin-bottom: 0.45rem; }
+    .edu-period { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); margin-bottom: 0.7rem; }
+    .edu-detail { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+    .edu-badge {
+      display: inline-block; background: var(--navy);
+      color: var(--teal); font-family: var(--mono);
+      font-size: 0.78rem; padding: 0.18rem 0.55rem;
+      border-radius: 4px; margin-top: 0.75rem;
+    }
+
+    /* ── CERTS ── */
+    #certifications { background: var(--light); }
+    .certs-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .cert-item {
+      display: flex; align-items: center; gap: 1.1rem;
+      background: var(--white); border-radius: 10px;
+      padding: 1.15rem 1.4rem; border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: var(--teal); }
+    .cert-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: rgba(13,191,160,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .cert-name { font-weight: 600; color: var(--text); font-size: 0.9125rem; }
+    .cert-date { font-family: var(--mono); font-size: 0.775rem; color: var(--teal); }
+    .cert-desc { font-size: 0.86rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-name {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.2rem; color: var(--white); margin-bottom: 1rem;
+    }
+    .footer-links {
+      display: flex; gap: 1.5rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 0.86rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    /* ── SCROLL FADE ── */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 1.25rem; }
+    }
+    @media (max-width: 460px) {
+      .scores-grid { grid-template-columns: 1fr 1fr; }
+      .hero-name { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───── NAV ───── -->
+<nav>
+  <span class="nav-logo">İsmail Çolak</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+  </ul>
+</nav>
+
+<!-- ───── HERO ───── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-avatar">İÇ</div>
+    <h1 class="hero-name">İsmail Çolak</h1>
+    <div class="hero-title"><span id="typed-text"></span><span class="cursor"></span></div>
+    <p class="hero-desc">
+      Computer Engineering student at Istanbul University – Cerrahpaşa, passionate about building systems across the full stack — from transistor-level hardware to cloud-native web applications.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/ismailcolakk13" target="_blank" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/ismail-%C3%A7olak-7159b1281/" target="_blank" class="btn btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:ismailcolakk13@gmail.com" class="btn btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───── ABOUT ───── -->
+<section id="about">
+  <div class="section-inner fade-in">
+    <div class="section-label">// about</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p>I'm a <strong>4th-year Computer Engineering student</strong> at Istanbul University – Cerrahpaşa (GPA 3.37), with a genuine interest in systems that span from hardware to cloud — embedded controllers, real-time streaming pipelines, and full-stack web apps.</p>
+        <p>I've interned at <strong>Havelsan A.Ş.</strong>, working with Apache Kafka on real-time distributed communication, and at <strong>Turkcell A.Ş.</strong> in Finance Solutions, where I built a .NET + React gamification app and wrote PL/SQL unit tests.</p>
+        <p>My personal projects range from <strong>AI-based optimization</strong> for aircraft center-of-gravity calculation (GA, PSO, NSGA-II) to a <strong>transistor-level 4-bit ALU</strong> in LTspice — reflecting a curiosity about the full computing stack.</p>
+        <p>In my spare time I enjoy sports like cycling and football. Also, I enjoy learning new things — Chitchat project started as one of those -. I also play around with game mechanics in Unity when I want a break from web work.
+I'm currently open to full-time software engineering roles, with a preference for backend or full-stack positions. I'm happy to consider both Istanbul-based and remote opportunities.</p>
+      </div>
+      <div>
+        <div class="scores-grid">
+          <div class="score-card">
+            <div class="score-num">3.37</div>
+            <div class="score-label">GPA</div>
+            <div class="score-sub">IÜC Computer Eng.</div>
+          </div>
+          <div class="score-card">
+            <div class="score-num">82.75</div>
+            <div class="score-label">ALES</div>
+            <div class="score-sub">Graduate Aptitude Exam</div>
+          </div>
+          <div class="score-card">
+            <div class="score-num">85</div>
+            <div class="score-label">YDS</div>
+            <div class="score-sub">Academic English Exam</div>
+          </div>
+          <div class="score-card">
+            <div class="score-num">22.5K</div>
+            <div class="score-label">YKS Rank</div>
+            <div class="score-sub">National University Exam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── SKILLS ───── -->
+<section id="skills">
+  <div class="section-inner fade-in">
+    <div class="section-label">// skills</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-categories">
+      <div class="skill-category">
+        <h3>Backend</h3>
+        <div class="skill-pills">
+          <span class="pill pill-teal">Java (Spring Boot)</span>
+          <span class="pill pill-teal">C# (.NET)</span>
+          <span class="pill pill-teal">PL/SQL</span>
+          <span class="pill pill-teal">Apache Kafka</span>
+          <span class="pill pill-teal">REST APIs</span>
+          <span class="pill pill-teal">Clean Architecture</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Frontend</h3>
+        <div class="skill-pills">
+          <span class="pill pill-amber">React.js</span>
+          <span class="pill pill-amber">JavaScript</span>
+          <span class="pill pill-amber">HTML / CSS</span>
+          <span class="pill pill-amber">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Systems &amp; Embedded</h3>
+        <div class="skill-pills">
+          <span class="pill pill-navy">C / C++</span>
+          <span class="pill pill-navy">LTspice</span>
+          <span class="pill pill-navy">Verilog</span>
+          <span class="pill pill-navy">FPGA / ASIC</span>
+          <span class="pill pill-navy">UART / JTAG</span>
+          <span class="pill pill-navy">RTOS</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Data &amp; AI</h3>
+        <div class="skill-pills">
+          <span class="pill pill-gray">Python</span>
+          <span class="pill pill-gray">Genetic Algorithms</span>
+          <span class="pill pill-gray">PSO / NSGA-II</span>
+          <span class="pill pill-gray">NumPy / Matplotlib</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Tooling</h3>
+        <div class="skill-pills">
+          <span class="pill pill-gray">Unity</span>
+          <span class="pill pill-gray">Git / GitHub</span>
+          <span class="pill pill-gray">UML / OOAD</span>
+          <span class="pill pill-gray">Draw.io</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── EXPERIENCE ───── -->
+<section id="experience">
+  <div class="section-inner fade-in">
+    <div class="section-label">// experience</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <span class="timeline-role">Software Engineering Intern</span>
+            <span class="timeline-date">Feb 2026 – Mar 2026</span>
+          </div>
+          <div class="timeline-company">Turkcell A.Ş. — Finance Solutions Department · İstanbul</div>
+          <p class="timeline-desc">
+            Contributed to an inventory management application by integrating Excel connectivity with ReactJS. Built an employee performance gamification app from scratch using .NET and ReactJS. Worked with PL/SQL databases and authored unit tests for stored procedures.
+          </p>
+          <div class="timeline-tags">
+            <span class="pill pill-teal">.NET</span>
+            <span class="pill pill-amber">ReactJS</span>
+            <span class="pill pill-navy">PL/SQL</span>
+            <span class="pill pill-gray">Unit Testing</span>
+            <span class="pill pill-gray">Gamification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <span class="timeline-role">Summer Engineering Intern</span>
+            <span class="timeline-date">Aug 2025 – Sep 2025</span>
+          </div>
+          <div class="timeline-company">Havelsan A.Ş. — Electronic Communication Team · İstanbul</div>
+          <p class="timeline-desc">
+            Gained hands-on experience with Apache Kafka, focusing on real-time data streaming, message processing, and distributed communication systems within a defense-technology software environment.
+          </p>
+          <div class="timeline-tags">
+            <span class="pill pill-teal">Apache Kafka</span>
+            <span class="pill pill-navy">Distributed Systems</span>
+            <span class="pill pill-gray">Real-time Streaming</span>
+            <span class="pill pill-gray">Message Processing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───── PROJECTS ───── -->
+<section id="projects">
+  <div class="section-inner fade-in">
+    <div class="section-label">// projects</div>
+    <h2 class="section-title">Personal Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">✈️</div>
+        <div class="project-name">Aircraft CG Optimizer</div>
+        <p class="project-desc">Python-based center-of-gravity optimization for aircraft using Genetic Algorithm, PSO, and NSGA-II. Features 3D tapered-wing visualization, CG crosshair annotation, and a Streamlit web interface for interactive presentation.</p>
+        <div class="project-stack">
+          <span class="pill pill-gray">Python</span>
+          <span class="pill pill-gray">NSGA-II</span>
+          <span class="pill pill-gray">PSO</span>
+          <span class="pill pill-gray">Streamlit</span>
+          <span class="pill pill-gray">Matplotlib</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13/genetiktest" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💳</div>
+        <div class="project-name">Digital Loan Management System</div>
+        <p class="project-desc">Full-stack loan & repayment platform built as a case study. Clean Architecture .NET 10 backend with EF Core, React 18 frontend, ER-modeled DB, simple-interest installment algorithm, and full REST API documentation.</p>
+        <div class="project-stack">
+          <span class="pill pill-teal">.NET 10</span>
+          <span class="pill pill-amber">React 18</span>
+          <span class="pill pill-navy">EF Core</span>
+          <span class="pill pill-gray">Clean Arch</span>
+          <span class="pill pill-gray">REST API</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13/architectcase" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💬</div>
+        <div class="project-name">ChitChat Messaging App</div>
+        <p class="project-desc">Real-time personal messaging app with a Spring Boot backend and React frontend. Supports user lookup by phone/email, structured Spring package architecture, and a README with full screenshots.</p>
+        <div class="project-stack">
+          <span class="pill pill-teal">Spring Boot</span>
+          <span class="pill pill-amber">React</span>
+          <span class="pill pill-navy">Java</span>
+          <span class="pill pill-gray">REST API</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13/chitchat" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+<!--       <div class="project-card">
+        <div class="project-icon">⚡</div>
+        <div class="project-name">4-bit ALU (Transistor-Level)</div>
+        <p class="project-desc">Complete transistor-level 4-bit ALU designed in LTspice, built bottom-up from CMOS gates through D flip-flops and registers to a top-level schematic supporting arithmetic and logic operations with full status flags.</p>
+        <div class="project-stack">
+          <span class="pill pill-navy">LTspice</span>
+          <span class="pill pill-navy">CMOS</span>
+          <span class="pill pill-navy">Digital Logic</span>
+          <span class="pill pill-gray">Hardware Design</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div> -->
+
+<!--       <div class="project-card">
+        <div class="project-icon">🔒</div>
+        <div class="project-name">IoT &amp; Embedded Security Research</div>
+        <p class="project-desc">Comprehensive research presentation on IoT and embedded systems cybersecurity: firmware analysis, debug interface exploitation (UART, JTAG), memory vulnerability classes, and practical network/API security testing methodologies.</p>
+        <div class="project-stack">
+          <span class="pill pill-navy">Cybersecurity</span>
+          <span class="pill pill-navy">Firmware Analysis</span>
+          <span class="pill pill-gray">UART / JTAG</span>
+          <span class="pill pill-gray">IoT Security</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div> -->
+
+<!--       <div class="project-card">
+        <div class="project-icon">📄</div>
+        <div class="project-name">PDF Annotation Remover</div>
+        <p class="project-desc">A Python utility that locates and removes highlight annotations from exam PDF documents using color-based pixel detection, cleanly stripping all visual annotation layers without altering underlying content.</p>
+        <div class="project-stack">
+          <span class="pill pill-gray">Python</span>
+          <span class="pill pill-gray">PDF Processing</span>
+          <span class="pill pill-gray">Image Processing</span>
+          <span class="pill pill-gray">Color Detection</span>
+        </div>
+        <a href="https://github.com/ismailcolakk13" target="_blank" class="project-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ───── EDUCATION ───── -->
+<section id="education">
+  <div class="section-inner fade-in">
+    <div class="section-label">// education</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-header-info">
+            <div class="edu-degree">B.Sc. Computer Engineering</div>
+            <div class="edu-school">Istanbul University – Cerrahpaşa</div>
+            <div class="edu-period">Sep 2021 – Present · 4th Year</div>
+          </div>
+          <img class="edu-logo" src="./iüc-logo.png" alt="İstanbul Üniversitesi – Cerrahpaşa"/>
+        </div>
+        <div class="edu-detail">Admitted by ranking 22,500 nationally in the YKS exam. Coursework spans embedded systems, digital electronics, network communications, object-oriented software design, and cybersecurity.</div>
+        <span class="edu-badge">GPA: 3.37 / 4.00</span>
+      </div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <div class="edu-header-info">
+            <div class="edu-degree">High School Diploma</div>
+            <div class="edu-school">İstanbul Üsküdar Lisesi</div>
+            <div class="edu-period">Sep 2017 – Jun 2021</div>
+          </div>
+          <img class="edu-logo" src="./iül-logo.jpeg" alt="İstanbul Üsküdar Lisesi"/>
+        </div>
+        <div class="edu-detail">Admitted by a ranking of 6.5% nationally in the TEOG exam. Graduated with a final score of 90 out of 100, demonstrating consistent academic performance throughout secondary education in İstanbul.</div>
+        <span class="edu-badge">Score: 90 / 100</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CERTIFICATIONS ───── -->
+<section id="certifications">
+  <div class="section-inner fade-in">
+    <div class="section-label">// certifications &amp; languages</div>
+    <h2 class="section-title">Certifications &amp; Languages</h2>
+    <div class="certs-list">
+      <div class="cert-item">
+        <div class="cert-icon">🪟</div>
+        <div>
+          <div class="cert-name">Foundational C# with Microsoft</div>
+          <div class="cert-date">Jul 2024</div>
+          <div class="cert-desc">Covered C# syntax, the .NET type system, OOP fundamentals, and practical development workflows on the .NET platform.</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">⚛️</div>
+        <div>
+          <div class="cert-name">React ile Web Programcılığı</div>
+          <div class="cert-date">Sep 2024</div>
+          <div class="cert-desc">Advanced React course covering state management, component lifecycle, hooks, and modern frontend design patterns.</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🌍</div>
+        <div>
+          <div class="cert-name">Languages</div>
+          <div class="cert-date"></div>
+          <div class="cert-desc">
+            <strong>Turkish</strong> — Native &nbsp;·&nbsp;
+            <strong>English</strong> — Professional Proficiency &nbsp;(YDS: 85 / 100)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+  <div class="footer-name">İsmail Çolak</div>
+  <div class="footer-links">
+    <a href="https://github.com/ismailcolakk13" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/ismail-%C3%A7olak7159b1281" target="_blank">LinkedIn</a>
+    <a href="mailto:ismailcolakk13@gmail.com">ismailcolakk13@gmail.com</a>
+    <a href="tel:+905438237105">0543 823 71 05</a>
+  </div>
+  <div class="footer-copy">© 2026 İsmail Çolak · Beykoz, İstanbul</div>
+</footer>
+
+<script>
+  /* ── Typing Animation ── */
+  const titles = [
+    'Full-Stack Developer',
+    'Embedded Systems Engineer',
+    'Computer Engineering Student',
+    'Software Architect'
+  ];
+  let ti = 0, ci = 0, del = false;
+  const el = document.getElementById('typed-text');
+  function type() {
+    const cur = titles[ti];
+    el.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+    if (!del && ci === cur.length) { del = true; setTimeout(type, 2000); return; }
+    if (del && ci === 0) { del = false; ti = (ti + 1) % titles.length; }
+    setTimeout(type, del ? 45 : 75);
+  }
+  type();
+
+  /* ── Scroll Fade-in ── */
+  const obs = new IntersectionObserver(entries =>
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
